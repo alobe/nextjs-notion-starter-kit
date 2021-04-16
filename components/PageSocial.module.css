@@ -1,6 +1,5 @@
 .pageSocial {
   display: flex;
-  flex-direction: column;
   align-items: center;
   text-align: center;
   color: var(--fg-color);
@@ -11,9 +10,9 @@
   border-radius: 50%;
   border: 2px solid var(--fg-color-6);
   transition: all 300ms ease-out;
-  width: 3.5em;
-  height: 3.5em;
-  margin: 0 0 1em;
+  width: 2.5em;
+  height: 2.5em;
+  margin-left: 0.7em;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -21,10 +20,6 @@
   text-decoration: none !important;
   user-select: none;
   cursor: pointer;
-}
-
-.action:last-child {
-  margin-bottom: 0;
 }
 
 .actionBg {

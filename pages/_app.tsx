@@ -25,6 +25,8 @@ import 'styles/notion.css'
 
 // global style overrides for prism theme (optional)
 import 'styles/prism-theme.css'
+import 'tailwindcss/tailwind.css'
+import 'animate.css/animate.min.css'
 
 // here we're bringing in any languages we want to support for
 // syntax highlighting via Notion's Code block

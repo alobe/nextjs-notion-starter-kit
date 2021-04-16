@@ -8,13 +8,13 @@ export default class MyDocument extends Document {
       <IconContext.Provider value={{ style: { verticalAlign: 'middle' } }}>
         <Html lang='en'>
           <Head>
-            <link rel='shortcut icon' href='/favicon.ico' />
+            <link rel='shortcut icon' href='/favicon.jpg' />
 
             <link rel='manifest' href='/manifest.json' />
           </Head>
 
           <body>
-            <script src='noflash.js' />
+            <script src='./scripts/noflash.js' />
 
             <Main />
 

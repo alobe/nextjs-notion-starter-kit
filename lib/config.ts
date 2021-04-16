@@ -99,7 +99,7 @@ export const includeNotionIdInUrls: boolean = getSiteConfig(
 
 export const isServer = typeof window === 'undefined'
 
-export const port = getEnv('PORT', '3000')
+export const port = getEnv('PORT', '8090')
 export const host = isDev ? `http://localhost:${port}` : `https://${domain}`
 
 export const apiBaseUrl = `${host}/api`
@@ -116,7 +116,7 @@ export const fathomId = isDev ? null : process.env.NEXT_PUBLIC_FATHOM_ID
 
 export const fathomConfig = fathomId
   ? {
-      excludedDomains: ['localhost', 'localhost:3000']
+      excludedDomains: ['localhost', 'localhost:8090']
     }
   : undefined
 

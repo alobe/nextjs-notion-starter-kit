@@ -4,10 +4,11 @@ import Link from 'next/link'
 import dynamic from 'next/dynamic'
 import cs from 'classnames'
 import { useRouter } from 'next/router'
-import { useSearchParam } from 'react-use'
+import { useSearchParam, useHover } from 'react-use'
 import BodyClassName from 'react-body-classname'
 import useDarkMode from 'use-dark-mode'
 import { PageBlock } from 'notion-types'
+import { FaMoon, FaSun, FaTwitter, FaGithub, FaLinkedin } from 'react-icons/fa';
 
 import { Tweet, TwitterContextProvider } from 'react-static-tweets'
 
@@ -30,8 +31,6 @@ import { Loading } from './Loading'
 import { Page404 } from './Page404'
 import { PageHead } from './PageHead'
 import { PageActions } from './PageActions'
-import { Footer } from './Footer'
-import { PageSocial } from './PageSocial'
 import { GitHubShareButton } from './GitHubShareButton'
 import { ReactUtterances } from './ReactUtterances'
 
@@ -53,6 +52,8 @@ import styles from './styles.module.css'
 // )
 
 const Pdf = dynamic(() => import('react-notion-x').then((notion) => notion.Pdf))
+
+const PageCover = dynamic(() => import('./PageCover'), { ssr: false })
 
 const Equation = dynamic(() =>
   import('react-notion-x').then((notion) => notion.Equation)
@@ -156,8 +157,37 @@ export const NotionPage: React.FC<types.PageProps> = ({
       pageAside = <PageActions tweet={tweet} />
     }
   } else {
-    pageAside = <PageSocial />
+    // pageAside = <PageSocial />
   }
+
+  const [hoveredE, hover] = useHover((hover) => {
+    const socials = [
+      config.twitter && {
+        link: `https://twitter.com/${config.twitter}`,
+        icon: <FaTwitter />,
+        color: '#55a6e9'
+      },
+      config.github && {
+        link: `https://github.com/${config.github}`,
+        icon: <FaGithub />,
+        color: '#a6cf59'
+      },
+      config.linkedin && {
+        link: `https://www.linkedin.com/in/${config.linkedin}`,
+        icon: <FaLinkedin />,
+        color: '#c27070'
+      },
+    ].filter(Boolean)
+    return (
+      <div className="fixed flex items-center top-16 left-6" style={{zIndex: 201}}>
+        <img src="/img/logo.png" className="w-10 h-10 mr-2 rounded-md animate__animated animate__heartBeat animate__infinite hover:animate-spin cursor-pointer" />
+        <div className={`${hover ? 'w-auto h-auto' : 'h-0 w-0'} overflow-hidden transition-all flex`}>
+          {socials.map((s, i) => <a href={s.link} target='_blank' className="text-4xl ml-3" style={{color: s.color}} key={i}>{s.icon}</a>)}
+          <i className="text-4xl ml-3 cursor-pointer" style={{color: darkMode.value ? '#9159e6' : '#eec752'}} onClick={() => darkMode.toggle()}>{darkMode.value ? <FaMoon /> : <FaSun />}</i>
+        </div>
+      </div>
+    );
+  });
 
   return (
     <TwitterContextProvider
@@ -215,6 +245,8 @@ export const NotionPage: React.FC<types.PageProps> = ({
 
       {isLiteMode && <BodyClassName className='notion-lite' />}
 
+      {hoveredE}
+
       <NotionRenderer
         bodyClassName={cs(
           styles.notion,
@@ -268,16 +300,17 @@ export const NotionPage: React.FC<types.PageProps> = ({
         mapImageUrl={mapNotionImageUrl}
         searchNotion={searchNotion}
         pageFooter={comments}
+        pageCover={<PageCover/>}
         pageAside={pageAside}
-        footer={
-          <Footer
-            isDarkMode={darkMode.value}
-            toggleDarkMode={darkMode.toggle}
-          />
-        }
+        // footer={
+        //   <Footer
+        //     isDarkMode={darkMode.value}
+        //     toggleDarkMode={darkMode.toggle}
+        //   />
+        // }
       />
 
-      <GitHubShareButton />
+      {/* <GitHubShareButton /> */}
     </TwitterContextProvider>
   )
 }
