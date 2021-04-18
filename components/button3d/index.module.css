@@ -1,0 +1,29 @@
+.btn-3d-wrapper {
+  margin-top: 10px;
+  margin: 0 auto;
+  width: fit-content;
+  height: 100%;
+  background: var(--button-background);
+  border-radius: 8px;
+  box-shadow: 2px 2px 4px 0 var(--button-border);
+}
+
+.btn-3d {
+  font-size: 20px;
+  color: var(--button-text-color);
+  padding: 16px 32px;
+  border-radius: 8px;
+  border: none;
+  transform: translateY(-10px);
+  background: var(--button-color);
+  outline: none;
+  transition: transform 0.15s cubic-bezier(0.05, -0.79, 0.11, 1.93);
+}
+
+.btn-3d:hover {
+  transform: translateY(-12px);
+}
+
+.btn-3d:active {
+  transform: translateY(-4px);
+}
