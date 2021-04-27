@@ -99,13 +99,13 @@ export const NotionPage: React.FC<types.PageProps> = ({
 
   const title = getBlockTitle(block, recordMap) || site.name
 
-  console.log('notion page', {
-    isDev: config.isDev,
-    title,
-    pageId,
-    rootNotionPageId: site.rootNotionPageId,
-    recordMap
-  })
+  // console.log('notion page', {
+  //   isDev: config.isDev,
+  //   title,
+  //   pageId,
+  //   rootNotionPageId: site.rootNotionPageId,
+  //   recordMap
+  // })
 
   if (!config.isServer) {
     // add important objects to the window global for easy debugging
@@ -160,7 +160,7 @@ export const NotionPage: React.FC<types.PageProps> = ({
     // pageAside = <PageSocial />
   }
 
-  const [hoveredE, hover] = useHover((hover) => {
+  const [hoveredE] = useHover((hover) => {
     const socials = [
       config.twitter && {
         link: `https://twitter.com/${config.twitter}`,
@@ -179,8 +179,8 @@ export const NotionPage: React.FC<types.PageProps> = ({
       },
     ].filter(Boolean)
     return (
-      <div className="fixed flex items-center top-16 left-6" style={{zIndex: 201}}>
-        <img src="/img/logo.png" className="w-10 h-10 mr-2 rounded-md animate__animated animate__heartBeat animate__infinite hover:animate-spin cursor-pointer" />
+      <div className="fixed flex flex-row-reverse items-center top-16 right-6" style={{zIndex: 201}}>
+        <img src="/img/logo.png" className="w-10 h-10 ml-2 rounded-md animate__animated animate__heartBeat animate__infinite hover:animate-spin cursor-pointer" />
         <div className={`${hover ? 'w-auto h-auto' : 'h-0 w-0'} overflow-hidden transition-all flex`}>
           {socials.map((s, i) => <a href={s.link} target='_blank' className="text-4xl ml-3" style={{color: s.color}} key={i}>{s.icon}</a>)}
           <i className="text-4xl ml-3 cursor-pointer" style={{color: darkMode.value ? '#9159e6' : '#eec752'}} onClick={() => darkMode.toggle()}>{darkMode.value ? <FaMoon /> : <FaSun />}</i>
@@ -188,6 +188,8 @@ export const NotionPage: React.FC<types.PageProps> = ({
       </div>
     );
   });
+  const isRootPage = pageId === site.rootNotionPageId;
+  console.log('site.rootNotionPageId :>> ', site.rootNotionPageId);
 
   return (
     <TwitterContextProvider
@@ -250,7 +252,7 @@ export const NotionPage: React.FC<types.PageProps> = ({
       <NotionRenderer
         bodyClassName={cs(
           styles.notion,
-          pageId === site.rootNotionPageId && 'index-page'
+          isRootPage && 'index-page'
         )}
         components={{
           pageLink: ({
@@ -300,7 +302,8 @@ export const NotionPage: React.FC<types.PageProps> = ({
         mapImageUrl={mapNotionImageUrl}
         searchNotion={searchNotion}
         pageFooter={comments}
-        pageCover={<PageCover/>}
+        pageCover={isRootPage ? <PageCover/> : undefined}
+        pageHeader={<div className="">dafad</div>}
         pageAside={pageAside}
         // footer={
         //   <Footer

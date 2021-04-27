@@ -28,6 +28,7 @@
   "dependencies": {
     "@google-cloud/firestore": "^4.9.1",
     "animate.css": "^4.1.1",
+    "antd": "^4.15.1",
     "chrome-aws-lambda": "^5.5.0",
     "classnames": "^2.2.6",
     "css-doodle": "^0.15.3",
