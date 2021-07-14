@@ -188,7 +188,6 @@ export const NotionPage: React.FC<types.PageProps> = ({
     );
   });
   const isRootPage = pageId === site.rootNotionPageId;
-  console.log('site.rootNotionPageId :>> ', site.rootNotionPageId);
 
   return (
     <TwitterContextProvider
@@ -266,7 +265,7 @@ export const NotionPage: React.FC<types.PageProps> = ({
             ...props
           }) => (
             <Link
-              href={href}
+              href={href === '/' ? '/root' : href}
               as={as}
               passHref={passHref}
               prefetch={prefetch}
@@ -302,17 +301,8 @@ export const NotionPage: React.FC<types.PageProps> = ({
         searchNotion={searchNotion}
         pageFooter={comments}
         pageCover={isRootPage ? <PageCover/> : undefined}
-        pageHeader={<div className="">dafad</div>}
         pageAside={pageAside}
-        // footer={
-        //   <Footer
-        //     isDarkMode={darkMode.value}
-        //     toggleDarkMode={darkMode.toggle}
-        //   />
-        // }
       />
-
-      {/* <GitHubShareButton /> */}
     </TwitterContextProvider>
   )
 }
