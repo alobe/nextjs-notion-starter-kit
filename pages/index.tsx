@@ -2,7 +2,7 @@ import React, { memo } from 'react';
 import dynamic from 'next/dynamic';
 import { Home } from 'components/home'
 
-const Baubles = dynamic(() => import('../components/baubles'), { ssr: false });
+// const Baubles = dynamic(() => import('../components/baubles'), { ssr: false });
 
 // export const getStaticProps = async () => {
 //   try {
@@ -20,8 +20,9 @@ const Baubles = dynamic(() => import('../components/baubles'), { ssr: false });
 
 export default memo(() => {
   return (
-    <div className="relative m-0 p-0 w-full h-full overflow-hidden" style={{background: 'linear-gradient(180deg, #e6eaf5 0%, #f6f6f6 80%);'}}>
-      <Baubles />
-    </div>
+    // <div className="relative m-0 p-0 w-full h-full overflow-hidden" style={{background: 'linear-gradient(180deg, #e6eaf5 0%, #f6f6f6 80%)'}}>
+    //   <Baubles />
+    // </div>
+    <Home />
   )
 })
